@@ -35,12 +35,17 @@
             <input id="{{key}}_url" type="url" class="validate" ng-model="song.url" ng-change="fullTitle.get()">
             <label for="{{key}}_url" ng-class="{active: song.url}">url (optional)</label>
           </div>
+          <div class="col s12" ng-show="song.url">
+            <div class="video-container">
+              <iframe ng-src="{{song.url | ytEmbed | trustUrl}}" frameborder="0"></iframe>
+            </div>
+          </div>
           <div class="input-field col s12">
             <input id="{{key}}_thumbnail" type="url" class="validate" ng-model="song.thumbnail">
             <label for="{{key}}_thumbnail" ng-class="{active: song.thumbnail}">Thumbnail (optional)</label>
           </div>
           <div class="col s12" ng-show="song.thumbnail">
-            <img class="responsive-img" alt="Thumbnail" ng-src="{{song.thumbnail}}"/>
+            <img class="responsive-img" alt="Thumbnail" ng-src="{{song.thumbnail | trustUrl }}"/>
           </div>
         </div>
     </span>

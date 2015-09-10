@@ -5,6 +5,22 @@ var _ = require('lodash');
 
   angular
     .module('app', ['services'])
+    .filter('ytEmbed', [function () {
+      return function (url) {
+        url = url || "";
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        if (match && match[2].length > 10)
+          return "http://www.youtube.com/embed/" + match[2] + "?rel=0&amp;controls=0";
+        else
+          return "";
+      };
+    }])
+    .filter('trustUrl', ['$sce', function ($sce) {
+      return function (url) {
+        return $sce.trustAsResourceUrl(url);
+      };
+    }])
     .controller('mainCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
       $scope.songs = [];
       $scope.progress = 0;
@@ -169,7 +185,7 @@ var _ = require('lodash');
                 scope.song.tags = scope.song.tags.trim();
                 fullTitle = fullTitle.replace(fullTitle.substring(fullTitle.indexOf("("), fullTitle.indexOf(")") + 1), "");
               }
-              var parts = fullTitle.split("-");
+              var parts = fullTitle.split(" - ");
               if (parts[0])
                 scope.song.artist = parts[0].trim();
               if (parts[1])
