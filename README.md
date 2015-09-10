@@ -14,3 +14,9 @@ Now go and download Youtube!
 
 # Developer stuff
 Node-webkit library is checked in, you don't need to download it separately. I'm using Webstorm and I suggest you to do the same, just choose Node-Webkit configuration and point "NW.js interpreter" to nwjs-v0.12.3-win-x64\nw.exe. Voila! Otherwise refer that [guide](https://github.com/nwjs/nw.js/#quick-start).
+
+## How to build from source
+1. Run ``gulp build`` from project root
+2. Install Inno and run setup.iss
+3. Replace Source Paths with correct one and build 
+4. **(Note)** Checked-in NW library has modified icon and if you use it to build app, built app will also use that icon
